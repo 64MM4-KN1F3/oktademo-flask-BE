@@ -11,6 +11,11 @@ db = SQLAlchemy()   #<-Initialize database object
 migrate = Migrate() #<-Initialize migration object
 
 app = Flask(__name__)
+
+# Pull from config file
+app.config.from_object('config.Config')
+
+# Update with OIDC config
 app.config.update({
     'SECRET_KEY': 'SomethingNotEntirelySecret',
     'OIDC_CLIENT_SECRETS': './client_secrets.json',
@@ -21,8 +26,6 @@ app.config.update({
 
 oidc = OpenIDConnect(app)
 
-# Pull from config file
-application.config.from_object('config.Config')
 
 # Initailize database
 db.init_app(application)          #<- This will get called in our models.py file
