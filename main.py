@@ -3,6 +3,12 @@ import time
 
 from flask import Flask, render_template, url_for, redirect
 from flask_oidc import OpenIDConnect
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
+
+# ~ Databases ~ #
+db = SQLAlchemy()   #<-Initialize database object
+migrate = Migrate() #<-Initialize migration object
 
 app = Flask(__name__)
 app.config.update({
@@ -15,6 +21,12 @@ app.config.update({
 
 oidc = OpenIDConnect(app)
 
+# Pull from config file
+application.config.from_object('config.Config')
+
+# Initailize database
+db.init_app(application)          #<- This will get called in our models.py file
+migrate.init_app(application, db) #<- Migration directory
 
 @app.route("/")
 def home():
@@ -44,3 +56,5 @@ def messages():
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=80, debug=True)
 
+# ~ Import database schemas ~ # 
+from app import models
