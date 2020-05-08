@@ -16,9 +16,9 @@ class testDB(db.Model):
 
 
        Columns
-         string_column  : column with strings
-         integer_column : column with integers
-         date_column    : column with dates, default is current date
+         user_id  : this will equate to 20 char Okta id string
+         wellbeing   : a zero to 1 float representation of user wellbeing
+         snap_time    : datetime of wellbeing snapshot
 
     """
 
@@ -26,11 +26,11 @@ class testDB(db.Model):
     #
     # This is the primary key of the database
     # It is of type = string with max characters = 140
-    string_column = db.Column(db.String(140),primary_key=True)
+    user_id = db.Column(db.String(32),primary_key=True)
 
     # ~~ Integer Column ~~ #
-    integer_column = db.Column(db.Integer)
+    wellbeing = db.Column(db.Float)
 
     # ~~ Date Column ~~ #
-    date_column = db.Column(db.DateTime, default=datetime.utcnow)
+    snap_time = db.Column(db.DateTime, default=datetime.utcnow)
     
