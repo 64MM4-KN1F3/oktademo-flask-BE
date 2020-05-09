@@ -1,7 +1,7 @@
 import json
 import time
 
-from flask import Flask, render_template, url_for, redirect
+from flask import Flask, render_template, url_for, redirect, request, jsonify
 from flask_oidc import OpenIDConnect
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -49,6 +49,7 @@ def create_app():
 
     if __name__ == 'app':
         application.run(host="0.0.0.0", port=80, debug=True)
+    return(application)
 
 # ~ Import database schemas ~ # 
 from app import models
