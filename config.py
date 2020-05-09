@@ -21,3 +21,8 @@ class Config(object):
     SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, 'db_repository')
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SECRET_KEY = 'SomethingNotEntirelySecret'
+    OIDC_CLIENT_SECRETS = './client_secrets.json'
+    OIDC_ID_TOKEN_COOKIE_SECURE = False
+    OIDC_SCOPES = ["openid", "profile", "email"]
+    OIDC_CALLBACK_ROUTE = '/authorization-code/callback'
