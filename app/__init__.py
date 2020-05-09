@@ -5,6 +5,7 @@ from flask import Flask, render_template, url_for, redirect, request, jsonify
 from flask_oidc import OpenIDConnect
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from flask_marshmallow import Marshmallow
 
 # ~ Databases ~ #
 db = SQLAlchemy()   #<-Initialize database object
@@ -12,6 +13,7 @@ migrate = Migrate() #<-Initialize migration object
 
 def create_app():
     application = Flask(__name__)
+    ma = Marshmallow(application)
 
     # Pull from config file
     application.config.from_object('config.Config')
