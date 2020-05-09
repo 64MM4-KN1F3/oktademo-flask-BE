@@ -41,6 +41,7 @@ pycrypto==2.6.1
 pycurl==7.19.0
 pygpgme==0.3
 pyliblzma==0.5.3
+PyMySQL==0.9.3
 pystache==0.5.3
 python-daemon==1.5.2
 python-dateutil==2.1
