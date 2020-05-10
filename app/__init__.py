@@ -30,8 +30,12 @@ def create_app():
         if oidc.user_loggedin:
             return "Hello autenticated user: %s" % oidc.user_getfield('preferred_username') 
         else:
-            return "This is the backend api to How R U. Please authenticate to access stuff." 
+            return 'This is the backend api to How R U. Please authenticate to access stuff: <a href="/login">Log in</a>' 
 
+    @application.route('/login')
+    @oidc.require_login
+    def login():
+        return 'Welcome %s' % oidc.user_getfield('email')
 
     @application.route("/api/messages")
     @oidc.accept_token(True)
