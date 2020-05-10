@@ -5,7 +5,8 @@ Babel==0.9.4
 backports.ssl-match-hostname==3.4.0.2
 boto==2.48.0
 botocore==1.15.13
-chardet==2.0.1
+certifi==2020.4.5.1
+chardet==3.0.4
 click==7.1.2
 cloud-init==0.7.6
 colorama==0.4.1
@@ -22,6 +23,7 @@ Flask-SQLAlchemy==2.4.1
 futures==3.0.3
 hibagent==1.0.0
 httplib2==0.17.3
+idna==2.9
 iniparse==0.3.1
 itsdangerous==1.1.0
 Jinja2==2.11.2
@@ -46,12 +48,12 @@ pyliblzma==0.5.3
 PyMySQL==0.9.3
 pystache==0.5.3
 python-daemon==1.5.2
-python-dateutil==2.1
+python-dateutil==2.8.1
 python-dotenv==0.13.0
 python-editor==1.0.4
 pyxattr==0.5.0
 PyYAML==3.10
-requests==1.2.3
+requests==2.23.0
 rsa==3.4.1
 simplejson==3.6.5
 six==1.14.0

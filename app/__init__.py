@@ -6,6 +6,7 @@ from flask_oidc import OpenIDConnect
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_marshmallow import Marshmallow
+from flask import g
 
 # ~ Databases ~ #
 db = SQLAlchemy()   #<-Initialize database object
@@ -37,20 +38,11 @@ def create_app():
     def login():
         return 'Welcome %s' % oidc.user_getfield('email')
 
-    @application.route("/api/messages")
-    @oidc.accept_token(True)
+    @application.route("/api/mydata")
+    @oidc.accept_token(True, scopes_required=['openid'])
     def messages():
         response = {
-            'messages': [
-                {
-                    'date': time.time(),
-                    'text': 'I am a robot.'
-                },
-                {
-                    'date': time.time()-3600,
-                    'text': 'Hello, World!'
-                }
-            ]
+           'hello': 'Welcome %s' % g.oidc_token_info['sub'] 
         }
 
         return json.dumps(response)
