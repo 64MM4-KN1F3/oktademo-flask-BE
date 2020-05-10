@@ -27,8 +27,10 @@ def create_app():
 
     @application.route("/")
     def home():
-        return "Hello!  There's not much to see here." \
-               "Please grab one of our front-end samples for use with this sample resource server"
+        if oidc.user_loggedin:
+            return "Hello autenticated user: %s" % oidc.user_getfield('preferred_username') 
+        else:
+            return "This is the backend api to How R U. Please authenticate to access stuff." 
 
 
     @application.route("/api/messages")
