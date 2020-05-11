@@ -1,5 +1,6 @@
 import json
 import time
+import pymysql
 
 from flask import Flask, render_template, url_for, redirect, request, jsonify
 from flask_oidc import OpenIDConnect
@@ -8,9 +9,16 @@ from flask_migrate import Migrate
 from flask_marshmallow import Marshmallow
 from flask import g
 
-# ~ Databases ~ #
+# ~ Databases init ~ #
 db = SQLAlchemy()   #<-Initialize database object
 migrate = Migrate() #<-Initialize migration object
+
+# ~ Database connection ~ #
+host = 'flaskdb01.ckuxkces0qhy.us-east-1.rds.amazonaws.com'
+dbname = 'testFlask'
+user = 'admin'
+password='flaskexample'
+port=3306
 
 def create_app():
     application = Flask(__name__)
@@ -41,8 +49,14 @@ def create_app():
     @application.route("/api/mydata")
     @oidc.accept_token(True, scopes_required=['openid'])
     def messages():
+        #Grab sql records that match uid in oidc token info and badly mash into response :/
+        conn = pymysql.connect(host, user=user, port=port, passwd=password,db=dbname)
+        c = conn.cursor()
+        c.execute('select * from testDB where user_id = "%s";' % g.oidc_token_info['uid'])
+        rows = c.fetchall()
         response = {
-           'hello': 'Welcome %s' % g.oidc_token_info['sub'] 
+           'subject': '%s' % g.oidc_token_info['sub'], 
+           'unformatted data': '%s' % " ".join(map(str, rows))
         }
 
         return json.dumps(response)

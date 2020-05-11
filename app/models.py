@@ -26,7 +26,10 @@ class testDB(db.Model):
     #
     # This is the primary key of the database
     # It is of type = string with max characters = 140
-    user_id = db.Column(db.String(32),primary_key=True)
+    snap_id = db.Column(db.Integer,primary_key=True)
+
+    user_id = db.Column(db.String(32))
+
 
     # ~~ Integer Column ~~ #
     wellbeing = db.Column(db.Float)
